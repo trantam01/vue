@@ -1,0 +1,25 @@
+stages:
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+deploy-p22:
+  stage: deploy
+  before_script:
+    - export MCHAT_EINAME="webmms-tja"
+    - export MCHAT_APPNAME="webmms-tja-app"
+    - export MCHAT_IOC="ioc/kapi"
+    - export MCHAT_DC="dc=dc@local"
+    - export MCHAT_WATCHLEVEL=4
+
+  script:
+    - npm install
+    - npm run build 
+    - docker-compose up -d --build
+    - docker image prune -f
+  only:
+    - main
+  tags:
+    - p22

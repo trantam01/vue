@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  page-tja:
+    image: motebus/page-tja
+    build: .
+    restart: always
+    container_name: page-tja
+    ports:
+      - "3000:3000"
+
+  
+
+
